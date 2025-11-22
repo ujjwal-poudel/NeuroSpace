@@ -1,0 +1,82 @@
+# -------------------------
+# Python
+# -------------------------
+__pycache__/
+*.py[cod]
+*.so
+
+# Byte-compiled / optimized / DLL files
+*.pyo
+*.pyd
+*.pdb
+
+# Virtual environment
+.neuroVenv
+venv
+.env
+.venv
+
+# Pipenv
+Pipfile.lock
+
+# Poetry
+poetry.lock
+
+# -------------------------
+# Project-Specific
+# -------------------------
+
+# Dataset
+data/living_room/
+
+# Model checkpoints, weights, logs
+checkpoints/
+logs/
+runs/
+outputs/
+wandb/
+
+# Rendered images or videos
+renders/
+generated/
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.mp4
+
+# -------------------------
+# Jupyter / Notebooks
+# -------------------------
+.ipynb_checkpoints/
+*.ipynb
+
+# -------------------------
+# Mac / Linux / OS
+# -------------------------
+.DS_Store
+Thumbs.db
+.desktop
+*.swp
+*.swo
+
+# -------------------------
+# IDEs
+# -------------------------
+
+# VSCode
+.vscode/
+.history/
+*.code-workspace
+
+# PyCharm
+.idea/
+*.iml
+
+# -------------------------
+# Build Artifacts
+# -------------------------
+build/
+dist/
+*.egg-info/
+.eggs/
