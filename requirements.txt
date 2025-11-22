@@ -1,0 +1,20 @@
+# --- Core Framework (Stable M3 Version) ---
+# We pin 2.4.1 because it has the best Apple Silicon (MPS) support so far.
+torch==2.4.1
+torchvision==0.19.1
+
+# --- The Safety Lock (Critical) ---
+# Prevents the "NumPy 2.0" disaster that breaks PyTorch
+numpy==1.26.4
+
+# --- Data & Math ---
+Pillow>=10.0.0
+tqdm==4.66.2
+
+# --- Visualization ---
+# Pinning matplotlib ensures your graphs don't change style unexpectedly
+matplotlib==3.8.4
+imageio==2.34.0
+
+# --- The 3D Model ---
+siren-pytorch>=0.1.6
