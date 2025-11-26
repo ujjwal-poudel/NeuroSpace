@@ -135,22 +135,37 @@ class Generator(nn.Module):
         )
 
     def forward(self, coords):
-        """Maps 3D coordinates to color and density values.
+        """
+        Maps 3D coordinates to color and density values.
 
-        Args:
-            coords (Tensor):
-                Tensor of shape (batch_size, num_points, 3)
-                representing 3D sample points.
+        Accepts:
+            coords of shape (N, 3)
+            or
+            coords of shape (B, N, 3)
 
         Returns:
-            Tuple[Tensor, Tensor]:
-                rgb: Tensor of shape (..., 3) with values in [0, 1].
-                sigma: Tensor of shape (..., 1) with positive density values.
+            rgb:   same shape as coords but last dim is 3
+            sigma: same shape but last dim is 1
         """
-        out = self.net(coords)
+        orig_shape = coords.shape
 
-        rgb = torch.sigmoid(out[..., :3])
-        sigma = torch.abs(out[..., 3:])
+        # If coords are (B, N, 3), flatten them
+        if coords.dim() == 3:
+            B, N, _ = coords.shape
+            coords_flat = coords.reshape(B * N, 3)
+        else:
+            coords_flat = coords
+
+        # Pass flattened points through network
+        out = self.net(coords_flat)
+
+        rgb = torch.sigmoid(out[:, :3])
+        sigma = torch.abs(out[:, 3:4])
+
+        # Restore shape if batched input was used
+        if coords.dim() == 3:
+            rgb = rgb.reshape(B, N, 3)
+            sigma = sigma.reshape(B, N, 1)
 
         return rgb, sigma
 
